@@ -38,5 +38,10 @@ Vous pouvez ensuite ouvrir le fichier Arduino.
 
 Avant de compiler sélectionner : Outils -> Types de Carte -> ESP32 Arduino -> ESP32 Dev Module.
 
-Puis ensuite cliquer sur Téléverser.
+Puis ensuite cliquer sur "Téléverser".
 
+Si vous avez l'erreur :
+
+“Failed to connect to ESP32: Timed out waiting for packet header”
+
+il faut maintenir enfoncé le bouton « BOOT/FLASH » de votre carte ESP32 tout en téléversant en même temps.
