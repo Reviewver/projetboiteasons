@@ -45,3 +45,7 @@ Si vous avez l'erreur :
 “Failed to connect to ESP32: Timed out waiting for packet header”
 
 il faut maintenir enfoncé le bouton « BOOT/FLASH » de votre carte ESP32 tout en téléversant en même temps.
+
+Vous pouvez voir les infos que la carte envoie sur le port série en sélectionnant dans le menu : Outils -> Moniteur Série. Puis sélectionner 115200 baud en vitesse et Pas de fin de Ligne.
+
+Si vous avez une erreur affichée par Java à propos du port série c'est due à java-8-openjdk/jre il faut le remplacer par java-11-openjdk en version de Java par défaut. 
