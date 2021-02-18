@@ -36,7 +36,7 @@ Vous pouvez ensuite ouvrir le fichier Arduino.
 
 ## Compilation
 
-Avant de compiler sélectionner : Outils -> Types de Carte -> ESP32 Arduino -> ESP32 Dev Module
+Avant de compiler sélectionner : Outils -> Types de Carte -> ESP32 Arduino -> ESP32 Dev Module.
 
-Puis ensuite cliquer sur Téléverser
+Puis ensuite cliquer sur Téléverser.
 
