@@ -12,11 +12,11 @@ Vous devez au préalable installer l'éditeur Arduino.
 
 Pour installe l'IDE Arduino sous Debian GNU/Linux, ouvrer un terminale, loguer vous en root ::
 
-  $ su
+  su
 
 Puis installer le paquet Arduino avec l'utilitaire apt via la commande ::
 
-  # apt-get intall arduino
+  apt-get intall arduino
   
 ## Configuration de l'éditeur
 
