@@ -100,6 +100,22 @@ void display_detect_buffer()
       Serial.printf(detect_balise_buffer[i].mac.c_str());
     }
 }
+
+// Calcul la taille du buffer
+int return_size_detect_buffer()
+{
+  int size_buffer_detect = 0;
+  for(int i = 0 ; i < balise_max_detect ; i++)
+  {
+    if(detect_balise_buffer[i].number!=0)
+    {
+      size_buffer_detect++;
+    }
+  }
+
+  return size_buffer_detect;
+}
+
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
       Serial.printf("Périphérique : %s \n", advertisedDevice.toString().c_str());
@@ -152,6 +168,7 @@ void loop() {
   // Lance le scanner
   BLEScanResults foundDevices = pBLEScan->start(scanTime, false);
   Serial.println("Recherche terminé !");
+  Serial.printf("Taille buffer : %d", return_size_detect_buffer());
   pBLEScan->clearResults();   // delete results fromBLEScan buffer to release memory
   delay(2000);
 }
