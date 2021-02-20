@@ -92,6 +92,14 @@ bool check_if_balise_is_in_zone(BLEAdvertisedDevice advertisedDevice)
       return 0;
 }
 
+// Parcours le tableau
+void display_detect_buffer()
+{
+    for(int i = 0 ; i < balise_max_detect ; i++)
+    {
+      Serial.printf(detect_balise_buffer[i].mac.c_str());
+    }
+}
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
       Serial.printf("Périphérique : %s \n", advertisedDevice.toString().c_str());
