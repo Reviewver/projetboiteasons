@@ -23,11 +23,16 @@ struct balise
 
 // Nombre de balise dans le tableau
 const int balise_max = 2;
+
+// Puissance maxi réception de zone
+const unsigned int maximum_reception_beacon = -60;
+
 // Tableau des adresses mac considéré comme étant des balises
 const struct balise baliseList[balise_max] = {{1,"d5:f4:0d:a3:66:e4"},{2,"d7:02:10:a7:5d:e0"}};
 
 // Nombre de balise détecter maximum
 const int balise_max_detect = 2;
+
 // Tableau des balise détecter
 struct balise detect_balise_buffer[balise_max_detect] = {};
 
@@ -78,10 +83,19 @@ bool add_balise_detect_buffer(struct balise detect_balise)
     }
     return false;
 }
+bool check_if_balise_is_in_zone(BLEAdvertisedDevice advertisedDevice)
+{
+      if(advertisedDevice.getRSSI() > maximum_reception_beacon)
+      {
+        return 1;
+      }
+      return 0;
+}
 
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
       Serial.printf("Périphérique : %s \n", advertisedDevice.toString().c_str());
+      Serial.printf("Puissance : %d\n", advertisedDevice.getRSSI());
       struct balise baliseDetect = check_if_balise_and_return_number(advertisedDevice);
       if(!baliseDetect.notFound)
       {
@@ -97,6 +111,12 @@ class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
           {
             Serial.printf("Le buffer de détection est plein");
           }
+        }
+
+        Serial.printf("\nDétection : %d\n", maximum_reception_beacon);
+        if(check_if_balise_is_in_zone(advertisedDevice))
+        {
+          Serial.printf("\nLa balis est dans la zone\n");
         }
       }
       
