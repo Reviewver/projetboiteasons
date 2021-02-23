@@ -7,6 +7,7 @@
 #include <BLEUtils.h>
 #include <BLEScan.h>
 #include <BLEAdvertisedDevice.h>
+#include <HardwareSerial.h>
 
 // Définition de la structure Balise
 struct balise
