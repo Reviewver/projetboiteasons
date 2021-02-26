@@ -8,6 +8,7 @@
 #include <BLEScan.h>
 #include <BLEAdvertisedDevice.h>
 #include <HardwareSerial.h>
+#include "DFPlayerMini_Fast.h"
 
 // Définition de la structure Balise
 struct balise
@@ -39,6 +40,10 @@ struct balise detect_balise_buffer[balise_max_detect] = {};
 
 int scanTime = 5; //In seconds
 BLEScan* pBLEScan;
+
+HardwareSerial Myserial(10);
+
+DFPlayerMini_Fast myMP3;
 
 // Vérifie que c'est une balise et retourne le numéro de la balise si elle est détecter sinon retourne -1
 struct balise check_if_balise_and_return_number(BLEAdvertisedDevice device)
@@ -118,15 +123,23 @@ class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
         if(check_if_balise_is_in_zone(advertisedDevice))
         {
           Serial.printf("\nLa balis est dans la zone\n");
+          if(!myMP3.isPlaying())
+          {
+            myMP3.play(1);
+          }
         }
       }
       
     }
 };
-
+  
 void setup() {
   Serial.begin(115200);
   Serial.println("Recherche...");
+
+ Myserial.begin(9600);
+ myMP3.begin(Myserial);
+
 
   // Initialisation du Bluetooth
   BLEDevice::init("");
