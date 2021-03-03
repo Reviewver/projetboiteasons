@@ -41,7 +41,7 @@ struct balise detect_balise_buffer[balise_max_detect] = {};
 int scanTime = 5; //In seconds
 BLEScan* pBLEScan;
 
-HardwareSerial Myserial(10);
+HardwareSerial Myserial(40);
 
 DFPlayerMini_Fast myMP3;
 
