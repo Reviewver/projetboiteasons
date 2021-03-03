@@ -21,6 +21,14 @@ struct balise
   bool notFound;
 };
 
+enum
+{
+  // Etat mode narrateur
+  MODE_NARATTEUR,
+  // Etat mode balise
+  MODE_BALISE
+};
+
 // Nombre de balise dans le tableau
 const int balise_max = 2;
 
