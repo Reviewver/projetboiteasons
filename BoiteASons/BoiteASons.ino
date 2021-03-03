@@ -14,6 +14,9 @@ struct balise
   // Numéro de la balise
   int number;
 
+  // Active la balise en tant que balise narrateur
+  bool narrateur;
+
   // Adresse mac de la balise
   std::string mac;
 
