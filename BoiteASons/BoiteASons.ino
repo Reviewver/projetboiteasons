@@ -8,6 +8,9 @@
 #include <BLEScan.h>
 #include <BLEAdvertisedDevice.h>
 
+HardwareSerial mySoftwareSerial(1);
+
+
 // Définition de la structure Balise
 struct balise
 {
