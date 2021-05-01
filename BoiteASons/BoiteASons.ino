@@ -7,9 +7,16 @@
 #include <BLEUtils.h>
 #include <BLEScan.h>
 #include <BLEAdvertisedDevice.h>
+#include "DFRobotDFPlayerMini.h"
 
+// Initialisation de la connection série avec le DFPlayer
 HardwareSerial mySoftwareSerial(1);
 
+// Initialisation du Dfplayer
+DFRobotDFPlayerMini myDFPlayer;
+
+// Régler le volume du Dfplayer
+int volume = 1;
 
 // Définition de la structure Balise
 struct balise
@@ -143,7 +150,17 @@ class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
         Serial.printf("\nDétection : %d\n", maximum_reception_beacon);
         if(check_if_balise_is_in_zone(advertisedDevice))
         {
-          Serial.printf("\nLa balis est dans la zone\n");
+          Serial.printf("\nLa balise est dans la zone\n");
+
+          // Si le Dfplayer est disponible
+          if (myDFPlayer.available()) {
+            uint8_t type = myDFPlayer.readType();
+            
+            if(type == DFPlayerPlayFinished){
+                // Joue la première chansons
+                myDFPlayer.play(1);
+            }
+          }
         }
       }
       
@@ -165,6 +182,24 @@ void setup() {
   
   pBLEScan->setInterval(100);
   pBLEScan->setWindow(99);  // less or equal setInterval value
+
+
+  // Initialisation de la connection sur les port 16 et 17
+  mySoftwareSerial.begin(9600, SERIAL_8N1, 16, 17);  // speed, type, RX, TX
+
+  // Vérification que le DFPlayer est connecté
+  while(!myDFPlayer.begin(mySoftwareSerial))
+  {
+    Serial.println(F("Impossible de se connecter"));
+  }
+  Serial.println(F("Initialisation du DFPlayer...."));
+
+  // Fixe le volume du dfplayer
+  myDFPlayer.volume(volume);
+  myDFPlayer.EQ(DFPLAYER_EQ_NORMAL);
+  // Lit les donnée depuis la carte SD
+  myDFPlayer.outputDevice(DFPLAYER_DEVICE_SD);
+
 }
 
 void loop() {
